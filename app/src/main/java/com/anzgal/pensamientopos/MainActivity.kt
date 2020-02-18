@@ -157,20 +157,39 @@ class MainActivity : AppCompatActivity() {
 
     fun sig(view: View){
         posicion++
-        texto.text = database[posicion]
-        posi?.setText(posicion.toString())
+        if (posicion > database.size-1){
+            posicion = 0
+            texto.text = database[posicion]
+            posi?.setText(posicion.toString())
+        }else {
+            texto.text = database[posicion]
+            posi?.setText(posicion.toString())
+        }
     }
 
     fun atras(view: View){
         posicion--
-        texto.text = database[posicion]
-        posi?.setText(posicion.toString())
+
+        if (posicion < 0){
+            posicion = database.size-1
+            texto.text = database[posicion]
+            posi?.setText(posicion.toString())
+        }else {
+            texto.text = database[posicion]
+            posi?.setText(posicion.toString())
+        }
     }
 
     fun enter(view: View){
         val a: Int = posi.getText().toString().toInt()
+        if (a < 0 || a > database.size-1){
+            texto.text = "Número no válido"
+            posicion = 0
+        }else{
+            posicion = a
+            texto.text = database[a]
+        }
 
-        texto.text = database[a]
 
 
     }
